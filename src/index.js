@@ -1,13 +1,23 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from "react";
+import ReactDOM from "react-dom";
+import { createHashHistory } from "history";
+import { Router, Route, Switch, Redirect } from "react-router-dom";
 
-import "index.scss";
+// core components
+import Admin from "layouts/Admin.jsx";
+import RTL from "layouts/RTL.jsx";
 
-let HelloWorld = () => {
-    return <h1>Hello there World!</h1>
-}
+import "assets/css/material-dashboard-react.css?v=1.6.0";
+
+const hist = createHashHistory();
 
 ReactDOM.render(
-    <HelloWorld />,
-    document.getElementById('root')
+  <Router history={hist}>
+    <Switch>
+      <Route path="/admin" component={Admin} />
+      <Route path="/rtl" component={RTL} />
+      <Redirect from="/" to="/admin/dashboard" />
+    </Switch>
+  </Router>,
+  document.getElementById("root")
 );
